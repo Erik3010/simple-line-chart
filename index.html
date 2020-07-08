@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title>Grafik Garis</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+	</style>
+  </head>
+  <body>
+    <canvas id="canvas" width="400" height="400"></canvas>
+
+	<script type="text/javascript">
+		const canvas = document.getElementById("canvas");
+		const ctx = canvas.getContext("2d");
+		const w = canvas.width;
+		const h = canvas.height;
+
+		//TODO: for the margin
+		const LEFT = 25;
+		const TOP = 25;
+
+		//TODO: data
+		var goals = [40, 47, 53, 76, 45, 47, 53, 42, 48, 67, 80, 87];
+
+		//TODO: get the largest value from the data to count the ratio
+		let largest = Math.max(...goals);
+
+		function generate() {
+			ctx.beginPath();
+
+			//TODO: draw line
+			ctx.strokeStyle = "purple";
+			//TODO: draw the base line
+			ctx.moveTo(LEFT, (h - (goals[0] / largest) * h) + TOP);
+			goals.forEach((goal, index) => {
+				// draw the line
+				// x: width divided by data length multiple by the index (to get fixed width) then add margin left (25)
+				// y: minus by the height
+				//	(goal/largest) => to get the height ratio
+				// 	after we got the ratio now, we multiple it by the height
+				ctx.lineTo(((w / goals.length) * index) + LEFT, (h - ((goal / largest) * h)) + TOP);
+
+			});
+			ctx.stroke();
+			ctx.closePath();
+
+			//TODO: draw dot
+			goals.forEach((goal, index) => {
+				ctx.beginPath();
+				ctx.fillStyle = ' purple';
+				ctx.arc((w / goals.length * index) + LEFT, (h - ((goal / largest) * h)) + TOP, 3, 0, 2*Math.PI);
+				ctx.fill();
+				ctx.closePath();
+			});
+		}
+
+		window.onload = function() {
+			generate();
+		}
+    </script>
+  </body>
+</html>

@@ -58,7 +58,7 @@
 			//TODO: draw dot
 			goals.forEach((goal, index) => {
 				ctx.beginPath();
-				ctx.fillStyle = ' purple';
+				ctx.fillStyle = 'purple';
 				ctx.arc((w / goals.length * index) + LEFT, (h - ((goal / largest) * h)) + TOP, 3, 0, 2*Math.PI);
 				ctx.fill();
 				ctx.closePath();
